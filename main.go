@@ -32,8 +32,10 @@ func (ship *Ship) attack(defender *Ship, weapon Weapon) {
 	generatedDamage := r1.Intn(int(weapon.MaxDamage))
 	actualAttackDamage := uint(generatedDamage)
 
+	// Printing out a battle report
 	fmt.Println(ship.Name, "'s", ship.Class, "attacks with it's <<", weapon.Name, ">> dealing", actualAttackDamage, "damage")
 	fmt.Println("******Pew pew >>>>>>")
+
 	// Deal the damage to the other player
 	// If the attack does more damage than the defender's ship has, then it should die
 	if actualAttackDamage >= defender.CurrentHP {
@@ -42,6 +44,7 @@ func (ship *Ship) attack(defender *Ship, weapon Weapon) {
 		defender.takeDamage(actualAttackDamage)
 	}
 
+	// Print damage dealt
 	fmt.Println(defender.Name, "has", defender.CurrentHP, "left")
 	if defender.CurrentHP <= 0 {
 		fmt.Println(defender.Name, "'s", defender.Class, "got frigate wrecked!")
@@ -129,7 +132,7 @@ func main() {
 		Name:           "Ion Accelerator",
 		Description:    "Uh it accelerates ions. Duh.",
 		Cost:           100,
-		MaxDamage:      75,
+		MaxDamage:      25,
 		Distance:       100,
 		MaxShots:       1,
 		RemainingShots: 1,
@@ -140,7 +143,7 @@ func main() {
 		Name:           "Corn Dog",
 		Description:    "A tasty treat for your defeat.",
 		Cost:           100,
-		MaxDamage:      75,
+		MaxDamage:      25,
 		Distance:       100,
 		MaxShots:       1,
 		RemainingShots: 1,
@@ -153,11 +156,19 @@ func main() {
 	for i := 1; i <= 5; i++ {
 		fmt.Println("===========================")
 		fmt.Println("Round", i, "::FIGHT!!!!!!!!")
-		// Dad Turn 1
-		dad.attack(&steven, dad.Weapons[0])
 
-		// Steven turn 1
-		steven.attack(&dad, steven.Weapons[0])
+		// Randomize the weapon chosen
+		// Generating random damage up to the weapon's max damage
+		s1 := rand.NewSource(time.Now().UnixNano())
+		r1 := rand.New(s1)
+		dadsWeapon := dad.Weapons[r1.Intn(len(dad.Weapons))]
+
+		// Dad Turn
+		dad.attack(&steven, dadsWeapon)
+
+		// Steven turn
+		stevensWeapon := steven.Weapons[r1.Intn(len(steven.Weapons))]
+		steven.attack(&dad, stevensWeapon)
 	}
 
 }
