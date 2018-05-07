@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 // Ship stores information about a ship
@@ -23,14 +25,20 @@ type Ship struct {
 func (ship *Ship) attack(defender *Ship) {
 	fmt.Println(ship.Name, " is attacking ", defender.Name)
 
-	fmt.Println(ship.Name, "attacks with his weapon dealing", ship.MaxAttack, "damage")
+	s1 := rand.NewSource(time.Now().UnixNano())
+	r1 := rand.New(s1)
+
+	generatedDamage := r1.Intn(int(ship.MaxAttack))
+	actualAttackDamage := uint(generatedDamage)
+
+	fmt.Println(ship.Name, "attacks with his weapon dealing", actualAttackDamage, "damage")
 	fmt.Println("******Pew pew >>>>>>")
 	// Deal the damage to the other player
 	// If the attack does more damage than the defender's ship has, then it should die
-	if ship.MaxAttack >= defender.CurrentHP {
+	if actualAttackDamage >= defender.CurrentHP {
 		defender.CurrentHP = 0
 	} else {
-		defender.takeDamage(ship.MaxAttack)
+		defender.takeDamage(actualAttackDamage)
 	}
 
 	fmt.Println(defender.Name, "has", defender.CurrentHP, "left")
@@ -89,7 +97,7 @@ func main() {
 		MaxAttack:   50,
 	}
 
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 5; i++ {
 		fmt.Println("===========================")
 		fmt.Println("Round", i, "::FIGHT!!!!!!!!")
 		// Dad Turn 1
