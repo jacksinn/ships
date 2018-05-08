@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"os"
 	"time"
 )
 
@@ -15,9 +14,11 @@ type Player struct {
 	Balance     uint
 	Ships       []Ship
 	CurrentShip Ship
+	Wins        uint
+	Losses      uint
 }
 
-func (attacker *Player) attack(defender *Player, weapon Weapon) {
+func (attacker *Player) attack(defender *Player, weapon Weapon) bool {
 	// Generating random damage up to the weapon's max damage
 	s1 := rand.NewSource(time.Now().UnixNano())
 	r1 := rand.New(s1)
@@ -52,8 +53,9 @@ ________                        ________
 \    \_\  \/ __ \|  Y Y  \  ___/  /    |    \   /\  ___/|  | \/
 \______  (____  /__|_|  /\___  > \_______  /\_/  \___  >__|   
 		\/     \/      \/     \/          \/          \/       
-		   					   `)
-		os.Exit(0)
+								  `)
+		return true
 	}
 	fmt.Println()
+	return false
 }

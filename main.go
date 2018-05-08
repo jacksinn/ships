@@ -14,6 +14,8 @@ func main() {
 		Name:    "Jack",
 		Level:   1,
 		Balance: 1000,
+		Wins:    0,
+		Losses:  0,
 	}
 	dad.CurrentShip = Ship{
 		ID:          1,
@@ -33,6 +35,8 @@ func main() {
 		Name:    "Steven",
 		Level:   1,
 		Balance: 1000,
+		Wins:    0,
+		Losses:  0,
 	}
 
 	steven.CurrentShip = Ship{
@@ -98,23 +102,52 @@ func main() {
 	dad.CurrentShip.Weapons = []Weapon{widowMaker, cornDog}
 	steven.CurrentShip.Weapons = []Weapon{over9k, ionAccelerator}
 
-	for i := 1; ; i++ {
-		fmt.Println(strings.Repeat("=", 80))
-		fmt.Println("Round", i, "::FIGHT!!!!!!!!")
+	// Play 100 rounds to get some stats
+	for n := 0; n < 1000; n++ {
+		// Reset Player Ship
+		dad.CurrentShip.CurrentHP = dad.CurrentShip.MaxHP
+		steven.CurrentShip.CurrentHP = steven.CurrentShip.MaxHP
 
-		// Randomize the weapon chosen
-		// Generating random damage up to the weapon's max damage
-		s1 := rand.NewSource(time.Now().UnixNano())
-		r1 := rand.New(s1)
-		dadsWeapon := dad.CurrentShip.Weapons[r1.Intn(len(dad.CurrentShip.Weapons))]
+		// Setup the initial game conditions
+		game := Battle{
+			Player1:  dad,
+			Player2:  steven,
+			GameOver: false,
+		}
 
-		// Dad Turn
-		dad.attack(&steven, dadsWeapon)
+		// Computer plays game until it's over
+		for i := 1; ; i++ {
+			fmt.Println(strings.Repeat("=", 80))
+			fmt.Println("Round", i, "::FIGHT!!!!!!!!")
 
-		// Steven turn
-		stevensWeapon := steven.CurrentShip.Weapons[r1.Intn(len(steven.CurrentShip.Weapons))]
-		steven.attack(&dad, stevensWeapon)
-		fmt.Println(strings.Repeat("=", 80))
+			// Randomize the weapon chosen
+			// Generating random damage up to the weapon's max damage
+			s1 := rand.NewSource(time.Now().UnixNano())
+			r1 := rand.New(s1)
+			dadsWeapon := dad.CurrentShip.Weapons[r1.Intn(len(dad.CurrentShip.Weapons))]
+
+			// Dad Turn
+			game.GameOver = dad.attack(&steven, dadsWeapon)
+
+			if game.GameOver {
+				dad.Wins++
+				steven.Losses++
+				break
+			}
+
+			// Steven turn
+			stevensWeapon := steven.CurrentShip.Weapons[r1.Intn(len(steven.CurrentShip.Weapons))]
+			game.GameOver = steven.attack(&dad, stevensWeapon)
+			if game.GameOver {
+				steven.Wins++
+				dad.Losses++
+				break
+			}
+
+			fmt.Println(strings.Repeat("=", 80))
+		}
 	}
 
+	fmt.Println(dad.Name, "won", dad.Wins, "times and lost", dad.Losses, "times")
+	fmt.Println(steven.Name, "won", steven.Wins, "times and lost", steven.Losses, "times")
 }
