@@ -1,0 +1,25 @@
+[
+    {
+        "ID": 1,
+        "Name": "Dad",
+        "Description": "Ship 1 Description",
+        "MaxWeapons": 2,
+        "Class": "Frigate",
+        "MaxHP": 100,
+        "CurrentHP": 100,
+        "Color": "Grey",
+        "MaxSpeed": 100,
+    },
+
+    {
+        "ID": 2,
+        "Name": "Steven",
+        "Description": "Ship 2 Description",
+        "MaxWeapons": 2,
+        "Class": "Dreadnaught",
+        "MaxHP": 100,
+        "Color": "Red",
+        "MaxSpeed": 100,
+        "CurrentHP": 100
+    }
+]
