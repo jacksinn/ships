@@ -34,9 +34,6 @@ type Ship struct {
 }
 
 func (ship *Ship) attack(defender *Ship, weapon Weapon) {
-	// Letting th euser know who is attacking whom
-	fmt.Print("\n", ship.Name, " is attacking ", defender.Name, "\n")
-
 	// Generating random damage up to the weapon's max damage
 	s1 := rand.NewSource(time.Now().UnixNano())
 	r1 := rand.New(s1)
@@ -44,7 +41,10 @@ func (ship *Ship) attack(defender *Ship, weapon Weapon) {
 	actualAttackDamage := uint(generatedDamage)
 
 	// Printing out a battle report
-	fmt.Println(ship.Name, "'s", ship.Class, "attacks with it's <<", weapon.Name, ">> dealing", actualAttackDamage, "damage")
+	// Letting th euser know who is attacking whom
+	fmt.Print("\n", ship.Name, " attacks ", defender.Name, "'s ", ship.Class, " with it's <<", weapon.Name, ">> dealing ", actualAttackDamage, " damage!\n")
+
+	// fmt.Println(ship.Name, "'s", ship.Class, "attacks with it's <<", weapon.Name, ">> dealing", actualAttackDamage, "damage")
 	fmt.Println("******Pew pew >>>>>>")
 
 	// Deal the damage to the other player
