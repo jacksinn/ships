@@ -16,7 +16,7 @@ func main() {
 	}
 	dad.Ship = Ship{
 		ID:          1,
-		Name:        "Frigate 1",
+		Name:        "Frigate I",
 		Description: "Ship 1 Description",
 		MaxWeapons:  2,
 		Class:       "Frigate I",
