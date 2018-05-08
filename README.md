@@ -7,6 +7,6 @@ Build ships based on fundamental characteristics like hull, wings, nose, etc
 
 # Ideas
 User can try to avoid getting hit by weapon using their 'evasive maneuvering' based on speed
-
+Estimate chance of victory base on ship's stats
 
 Have other people repair the ships -- different repairer levels etc

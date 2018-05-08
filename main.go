@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -98,7 +99,7 @@ func main() {
 	steven.Ship.Weapons = []Weapon{over9k, ionAccelerator}
 
 	for i := 1; ; i++ {
-		fmt.Println("===========================")
+		fmt.Println(strings.Repeat("=", 80))
 		fmt.Println("Round", i, "::FIGHT!!!!!!!!")
 
 		// Randomize the weapon chosen
@@ -113,6 +114,7 @@ func main() {
 		// Steven turn
 		stevensWeapon := steven.Ship.Weapons[r1.Intn(len(steven.Ship.Weapons))]
 		steven.Ship.attack(&dad.Ship, stevensWeapon)
+		fmt.Println(strings.Repeat("=", 80))
 	}
 
 }

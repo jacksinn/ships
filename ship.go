@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -34,7 +35,7 @@ type Ship struct {
 
 func (ship *Ship) attack(defender *Ship, weapon Weapon) {
 	// Letting th euser know who is attacking whom
-	fmt.Println(ship.Name, " is attacking ", defender.Name)
+	fmt.Print("\n", ship.Name, " is attacking ", defender.Name, "\n")
 
 	// Generating random damage up to the weapon's max damage
 	s1 := rand.NewSource(time.Now().UnixNano())
@@ -55,7 +56,8 @@ func (ship *Ship) attack(defender *Ship, weapon Weapon) {
 	}
 
 	// Print damage dealt
-	fmt.Println(defender.Name, "has", defender.CurrentHP, "left")
+	defender.printHealth()
+
 	if defender.CurrentHP <= 0 {
 		fmt.Println(defender.Name, "'s", defender.Class, "got frigate wrecked!")
 		fmt.Println(ship.Name, "is the winner!!!")
@@ -69,9 +71,15 @@ ________                        ________
 		   					   `)
 		os.Exit(0)
 	}
-	fmt.Println("--------------------------")
+	fmt.Println()
 }
 
 func (ship *Ship) takeDamage(damage uint) {
 	ship.CurrentHP = ship.CurrentHP - damage
+}
+
+func (ship Ship) printHealth() {
+	// fmt.Println(defender.Name, "has", defender.CurrentHP, "health left")
+
+	fmt.Print("Health: ", ship.CurrentHP, "/", ship.MaxHP, "[", strings.Repeat("*", int(ship.CurrentHP)), strings.Repeat(" ", int(ship.MaxHP-ship.CurrentHP)), "]\n")
 }
