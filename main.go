@@ -16,7 +16,7 @@ func main() {
 	}
 	dad.Ship = Ship{
 		ID:          1,
-		Name:        "Dad",
+		Name:        "Frigate 1",
 		Description: "Ship 1 Description",
 		MaxWeapons:  2,
 		Class:       "Frigate I",
@@ -52,7 +52,7 @@ func main() {
 		Name:           "over 9000",
 		Description:    "This weapon was made by the saltyest of people.",
 		Cost:           9000,
-		MaxDamage:      75,
+		MaxDamage:      30,
 		Distance:       100,
 		MaxShots:       1,
 		RemainingShots: 1,
@@ -64,7 +64,7 @@ func main() {
 		Name:           "Widow Maker",
 		Description:    "Time to bury yo spouse.",
 		Cost:           9000,
-		MaxDamage:      75,
+		MaxDamage:      30,
 		Distance:       100,
 		MaxShots:       1,
 		RemainingShots: 1,
@@ -76,7 +76,7 @@ func main() {
 		Name:           "Ion Accelerator",
 		Description:    "Uh it accelerates ions. Duh.",
 		Cost:           100,
-		MaxDamage:      25,
+		MaxDamage:      5,
 		Distance:       100,
 		MaxShots:       1,
 		RemainingShots: 1,
@@ -87,7 +87,7 @@ func main() {
 		Name:           "Corn Dog",
 		Description:    "A tasty treat for your defeat.",
 		Cost:           100,
-		MaxDamage:      25,
+		MaxDamage:      5,
 		Distance:       100,
 		MaxShots:       1,
 		RemainingShots: 1,
@@ -97,7 +97,7 @@ func main() {
 	dad.Ship.Weapons = []Weapon{widowMaker, cornDog}
 	steven.Ship.Weapons = []Weapon{over9k, ionAccelerator}
 
-	for i := 1; i <= 5; i++ {
+	for i := 1; ; i++ {
 		fmt.Println("===========================")
 		fmt.Println("Round", i, "::FIGHT!!!!!!!!")
 
