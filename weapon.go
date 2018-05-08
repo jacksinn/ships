@@ -10,4 +10,5 @@ type Weapon struct {
 	Distance       uint
 	MaxShots       uint
 	RemainingShots uint
+	FlavorText     string
 }
