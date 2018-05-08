@@ -11,7 +11,7 @@ func main() {
 	// Player 1
 	dad := Player{
 		ID:      1,
-		Name:    "Dad",
+		Name:    "Jack",
 		Level:   1,
 		Balance: 1000,
 	}
@@ -30,7 +30,7 @@ func main() {
 	// Player 2
 	steven := Player{
 		ID:      1,
-		Name:    "Dad",
+		Name:    "Steven",
 		Level:   1,
 		Balance: 1000,
 	}
@@ -109,11 +109,11 @@ func main() {
 		dadsWeapon := dad.Ship.Weapons[r1.Intn(len(dad.Ship.Weapons))]
 
 		// Dad Turn
-		dad.Ship.attack(&steven.Ship, dadsWeapon)
+		dad.attack(&steven, dadsWeapon)
 
 		// Steven turn
 		stevensWeapon := steven.Ship.Weapons[r1.Intn(len(steven.Ship.Weapons))]
-		steven.Ship.attack(&dad.Ship, stevensWeapon)
+		steven.attack(&dad, stevensWeapon)
 		fmt.Println(strings.Repeat("=", 80))
 	}
 
