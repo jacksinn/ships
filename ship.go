@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+/*
+ *  0 - Corvette
+ *  1 - Freighter
+ *  2 - Frigate
+ *  3 - Cruiser
+ *  4 - Carrier
+ *  5 - Dreadnought
+ */
+
 // Ship stores information about a ship
 type Ship struct {
 	ID          uint
@@ -14,7 +23,7 @@ type Ship struct {
 	Description string
 	MaxWeapons  uint
 	Weapons     []Weapon
-	Class       string // Cruiser, Caravel, Frigate, Dreadnaught
+	Class       string
 	MaxHP       uint
 	CurrentHP   uint
 	Color       string
