@@ -9,11 +9,12 @@ import (
 
 // Player information
 type Player struct {
-	ID      uint
-	Name    string
-	Level   uint
-	Balance uint
-	Ship    Ship
+	ID          uint
+	Name        string
+	Level       uint
+	Balance     uint
+	Ships       []Ship
+	CurrentShip Ship
 }
 
 func (attacker *Player) attack(defender *Player, weapon Weapon) {
@@ -25,24 +26,24 @@ func (attacker *Player) attack(defender *Player, weapon Weapon) {
 
 	// Printing out a battle report
 	// Letting th euser know who is attacking whom
-	fmt.Print("\n", attacker.Name, " attacks ", defender.Name, "'s ", defender.Ship.Class, " with it's <<", weapon.Name, ">> dealing ", actualAttackDamage, " damage!\n")
+	fmt.Print("\n", attacker.Name, " attacks ", defender.Name, "'s ", defender.CurrentShip.Class, " with it's <<", weapon.Name, ">> dealing ", actualAttackDamage, " damage!\n")
 
 	// fmt.Println(ship.Name, "'s", ship.Class, "attacks with it's <<", weapon.Name, ">> dealing", actualAttackDamage, "damage")
 	fmt.Println("******Pew pew >>>>>>")
 
 	// Deal the damage to the other player
 	// If the attack does more damage than the defender's ship has, then it should die
-	if actualAttackDamage >= defender.Ship.CurrentHP {
-		defender.Ship.CurrentHP = 0
+	if actualAttackDamage >= defender.CurrentShip.CurrentHP {
+		defender.CurrentShip.CurrentHP = 0
 	} else {
-		defender.Ship.takeDamage(actualAttackDamage)
+		defender.CurrentShip.takeDamage(actualAttackDamage)
 	}
 
 	// Print damage dealt
-	defender.Ship.printHealth()
+	defender.CurrentShip.printHealth()
 
-	if defender.Ship.CurrentHP <= 0 {
-		fmt.Println(defender.Name, "'s", defender.Ship.Class, "got frigate wrecked!")
+	if defender.CurrentShip.CurrentHP <= 0 {
+		fmt.Println(defender.Name, "'s", defender.CurrentShip.Class, "got frigate wrecked!")
 		fmt.Println(attacker.Name, "is the winner!!!")
 		fmt.Println(`
 ________                        ________                     

@@ -15,7 +15,7 @@ func main() {
 		Level:   1,
 		Balance: 1000,
 	}
-	dad.Ship = Ship{
+	dad.CurrentShip = Ship{
 		ID:          1,
 		Name:        "Frigate I",
 		Description: "Ship 1 Description",
@@ -35,7 +35,7 @@ func main() {
 		Balance: 1000,
 	}
 
-	steven.Ship = Ship{
+	steven.CurrentShip = Ship{
 		ID:          2,
 		Name:        "Dreadnaught I",
 		Description: "Ship 2 Description",
@@ -95,8 +95,8 @@ func main() {
 	}
 
 	// Attaching weapons to ships
-	dad.Ship.Weapons = []Weapon{widowMaker, cornDog}
-	steven.Ship.Weapons = []Weapon{over9k, ionAccelerator}
+	dad.CurrentShip.Weapons = []Weapon{widowMaker, cornDog}
+	steven.CurrentShip.Weapons = []Weapon{over9k, ionAccelerator}
 
 	for i := 1; ; i++ {
 		fmt.Println(strings.Repeat("=", 80))
@@ -106,13 +106,13 @@ func main() {
 		// Generating random damage up to the weapon's max damage
 		s1 := rand.NewSource(time.Now().UnixNano())
 		r1 := rand.New(s1)
-		dadsWeapon := dad.Ship.Weapons[r1.Intn(len(dad.Ship.Weapons))]
+		dadsWeapon := dad.CurrentShip.Weapons[r1.Intn(len(dad.CurrentShip.Weapons))]
 
 		// Dad Turn
 		dad.attack(&steven, dadsWeapon)
 
 		// Steven turn
-		stevensWeapon := steven.Ship.Weapons[r1.Intn(len(steven.Ship.Weapons))]
+		stevensWeapon := steven.CurrentShip.Weapons[r1.Intn(len(steven.CurrentShip.Weapons))]
 		steven.attack(&dad, stevensWeapon)
 		fmt.Println(strings.Repeat("=", 80))
 	}
