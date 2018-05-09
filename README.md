@@ -10,3 +10,4 @@ User can try to avoid getting hit by weapon using their 'evasive maneuvering' ba
 Estimate chance of victory base on ship's stats
 Add weapon flavor text (like how it shoots -- pew pew, kaboom)
 Have other people repair the ships -- different repairer levels etc
+Information about the ship will be stored on the blockchain but the mechanics will be done is js/wasm/whatever

@@ -19,17 +19,15 @@ type Player struct {
 }
 
 func (attacker *Player) attack(defender *Player, weapon Weapon) bool {
+	// TODO: break up this function into smaller functions
+
 	// Generating random damage up to the weapon's max damage
-	s1 := rand.NewSource(time.Now().UnixNano())
-	r1 := rand.New(s1)
-	generatedDamage := r1.Intn(int(weapon.MaxDamage))
-	actualAttackDamage := uint(generatedDamage)
+	actualAttackDamage := uint(getRandom(int(weapon.MaxDamage)))
 
 	// Printing out a battle report
-	// Letting th euser know who is attacking whom
+	// Letting the user know who is attacking whom
 	fmt.Print("\n", attacker.Name, " attacks ", defender.Name, "'s ", defender.CurrentShip.Class, " with it's <<", weapon.Name, ">> dealing ", actualAttackDamage, " damage!\n")
 
-	// fmt.Println(ship.Name, "'s", ship.Class, "attacks with it's <<", weapon.Name, ">> dealing", actualAttackDamage, "damage")
 	fmt.Println("******Pew pew >>>>>>")
 
 	// Deal the damage to the other player
@@ -58,4 +56,10 @@ ________                        ________
 	}
 	fmt.Println()
 	return false
+}
+
+func getRandom(max int) int {
+	s1 := rand.NewSource(time.Now().UnixNano())
+	r1 := rand.New(s1)
+	return r1.Intn(max)
 }
